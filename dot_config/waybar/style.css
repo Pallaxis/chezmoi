@@ -1,0 +1,172 @@
+/* import colors */
+@import url('./color.css');
+
+/* font configuration */
+* {
+	font-family: JetBrainsMono Nerd Font Propo;
+	font-size: 14px;
+}
+
+/* main part
+background properties */
+window#waybar {
+	background: alpha(@base, 0.3);
+	color: alpha(@blue, 0.9);
+	border: 2px solid @blue;
+	border-radius: 50px;
+	transition-property: background-color;
+	transition-duration: .6s;
+}
+/* remove bg on empty */
+window#waybar.empty {
+	background-color: transparent;
+}
+
+
+
+/* modules */
+#custom-icon {
+	background: @blue;
+	border-radius: 50px;
+	color: @base;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 24px;
+}
+#custom-power {
+	background: @blue;
+	border-radius: 50px;
+	color: @base;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 24px;
+}
+#workspaces {
+	background: alpha(#343451, 0.5);
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 8px;
+	padding-right: 8px;
+	border: 0px;
+	border-radius: 50px 50px 50px 50px;
+	font-weight: bold;
+	font-style: normal;
+	opacity: 0.8;
+	font-size: 16px;
+	color: @textcolor1;
+}
+
+#workspaces button {
+	padding: 0px 10px;
+	margin: 5px 3px;
+	border-radius: 50px;
+	border: 0px;
+	color: @blue;
+	background-color: alpha(@base, 0.3);
+	transition: all 0.3s ease-in-out;
+	opacity: 1.0;
+}
+
+#workspaces button.active {
+	color: @base;
+	background: @blue;
+	border-radius: 15px;
+	min-width: 40px;
+	transition: all 0.3s ease-in-out;
+	opacity:1.0;
+}
+
+#clock {
+	background: alpha(#343451, 0.5);
+	font-weight: bold;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-right: 10px;
+	padding-left: 20px;
+	border-radius: 50px 20px 20px 50px;
+}
+#clock.2 {
+	background: alpha(#343451, 0.5);
+	font-weight: bold;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 10px;
+	padding-right: 20px;
+	border-radius: 20px 50px 50px 20px;
+}
+
+#custom-notify {
+	background: alpha(#343451, 0.5);
+	margin-bottom: 6px;
+	margin-top: 6px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 50px;
+}
+
+#network {
+	background: alpha(#343451, 0.5);
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 15px;
+	padding-right: 10px;
+	border-radius: 50px 20px 20px 50px;
+}
+#network.2 {
+	border-radius: 20px 50px 50px 20px;
+	padding-left: 10px;
+	padding-right: 15px;
+}
+#tray {
+	background: alpha(#343451, 0.5);
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 15px;
+	padding-right: 10px;
+	border-radius: 50px 20px 20px 50px;
+}
+#custom-updates {
+	background: alpha(#343451, 0.5);
+	border-radius: 20px 50px 50px 20px;
+	margin-bottom: 6px;
+	margin-top: 6px;
+	padding-left: 10px;
+	padding-right: 15px;
+}
+#pulseaudio {
+	background: alpha(#343451, 0.5);
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 15px;
+	padding-right: 10px;
+	border-radius: 50px 20px 20px 50px;
+	min-width: 17px;
+}
+#wireplumber {
+	background: alpha(#343451, 0.5);
+	margin-top: 6px;
+	margin-bottom: 6px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 7px;
+	min-width: 17px;
+}
+#wireplumber.2 {
+	border-radius: 20px 50px 50px 20px;
+	margin-bottom: 6px;
+	margin-top: 6px;
+	padding-left: 10px;
+	padding-right: 15px;
+	min-width: 42px;
+}
+#custom-lock {
+	background: @blue;
+	border-radius: 50px;
+	color: @base;
+	font-size: 24px;
+}
+#cava {
+	border-radius: 50px 20px 20px 50px;
+	font-size: 20px;
+	opacity: 0.4; 
+}

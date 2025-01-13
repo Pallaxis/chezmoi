@@ -1,0 +1,166 @@
+{
+	"layer": "bottom",
+	"position": "bottom",
+	"margin-bottom": 5,
+	"height": 40,
+	"spacing": 4,
+	"margin-left": 5,
+	"margin-right": 5,
+
+	"modules-left": [
+		"custom/icon",
+		"hyprland/workspaces",
+		"cava"
+	],
+	"modules-center": [
+		"clock",
+		"clock#2",
+	],
+	"modules-right": [
+		"custom/updicon",
+		"custom/upd",
+		"tray",
+		"custom/updates",
+		"network",
+		"network#2",
+		"pulseaudio",
+		"wireplumber",
+		"wireplumber#2",
+		"custom/power"
+	],
+
+
+
+	"custom/icon": {
+		"format": "  ",
+		"tooltip-format": "calcy :3",
+		"on-click": "deepin-calculator"
+	},
+	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"urgent": "",
+			"1": "Ⅰ",
+			"2": "Ⅱ",
+			"3": "Ⅲ",
+			"4": "Ⅳ",
+			"5": "Ⅴ",
+			"6": "Ⅵ",
+			"7": "Ⅶ",
+			"8": "Ⅷ",
+			"9": "Ⅸ",
+			"10": "Ⅹ"
+		},
+		"on-scroll-up": "hyprctl dispatch workspace r-1",
+		"on-scroll-down": "hyprctl dispatch workspace r+1",
+		"on-click": "activate",
+		"tooltip": false,
+		"active-only": false,
+		"persistent-workspaces": {
+			"*": 5,
+		}
+	},
+	"tray": {
+		"spacing": 20,
+		"icon-size": 25
+	},
+	"cava": {
+		"rotate" : 270,
+		"format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+		"bar_delimiter": 0
+	},
+
+
+
+	"clock": {
+		"format": "{:%R}",
+		"on-click": "thunderbird -calendar",
+		"tooltip": false
+	},
+	"clock#2": {
+		"format": "{:%A, %b %d %Y}",
+		"on-click": "thunderbird -calendar",
+		"tooltip": false
+	},
+
+	"custom/updates": {
+		"format": "{} {icon}",
+		"return-type": "json",
+		"format-icons": {
+			"has-updates": "󱍷",
+			"updated": "󰂪"
+		},
+		"exec-if": "which waybar-module-pacman-updates",
+		"exec": "waybar-module-pacman-updates  --interval-seconds 60 --network-interval-seconds 300",
+		"on-click": "hyprctl dispatch exec 'kitty ~/.local/share/bin/update.sh'",
+	},
+
+	"network": {
+		"format": "{ifname}",
+		"format-wifi": "{icon}",
+		"format-ethernet": "󰌘",
+		"format-disconnected": "󰌙", //An empty format will hide the module.
+		"tooltip-format": "",
+		"tooltip-format-wifi": "󱚽 {essid}",
+		"tooltip-format-ethernet": "󰌘 {ifname}",
+		"tooltip-format-disconnected": "",
+		"max-length": 50,
+		"format-icons": [
+			"󰤯",
+			"󰤟",
+			"󰤢",
+			"󰤥",
+			"󰤨"
+		],
+		"on-click": "nm-connection-editor"
+	},
+	"network#2": {
+		"format": "{ifname}",
+		"format-wifi": "{ipaddr}",
+		"format-ethernet": "{ipaddr}",
+		"format-disconnected": "Disconnected",
+		"tooltip-format": "",
+		"tooltip-format-wifi": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
+		"tooltip-format-ethernet": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
+		"tooltip-format-disconnected": "Disconnected",
+		"on-click": "nm-connection-editor",
+		"on-click-right": "~/.local/share/bin/nm-applet.sh toggle"
+	},
+	"wireplumber": {
+		"format": "{icon}",
+		"format-muted": "",
+		"max-volume": 150,
+		"scroll-step": 5,
+		"format-icons": {
+			"default": [
+				"",
+				""
+			]
+		},
+		"on-click": "wpctl set-mute @DEFAULT_SINK@ toggle"
+	},
+	"wireplumber#2": {
+		"format": "{volume}%",
+		"format-muted": "muted",
+		"max-volume": 150,
+		"scroll-step": 5,
+		"format-icons": {
+			"default": [
+				"",
+				""
+			]
+		},
+		"on-click": "pkill -x pavucontrol || pavucontrol -t 3"
+	},
+	"pulseaudio": {
+		"format": "{format_source}",
+		"format-source": "",
+		"format-source-muted": "",
+		"on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle"
+	},
+	"custom/power": {
+		"format": " ⏻ ",
+		"tooltip": false,
+		"on-click": "~/.local/share/bin/wlogout.sh"
+	}
+}
