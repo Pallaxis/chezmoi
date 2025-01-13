@@ -1,0 +1,6 @@
+makepkg -si # -s get dependencies -i install
+
+sudo netstat -tunlp # list all listening ports
+
+stow --adopt . # overwrites git dir with current dotfiles
+git restore . # restores git dir to main branch

@@ -1,0 +1,94 @@
+!/bin/bash
+
+#===============================================================
+# Constants
+#===============================================================
+
+LOOP=true # rsync loop, helpful with not stable internet connections, it can be true or false
+SERVER=pallaxis@192.168.68.56 # replace x.x.x.x with the remote server's IP or host name
+BWLIMIT=0 # maximum transfer rate (kbytes/s), 0 means no limit
+
+echo "rsync --bwlimit set to $BWLIMIT kbytes/s (0 means no limit)"
+
+DECVIRDIR=/home/pallaxis/.cache/toBeRestoredVirtualDecrypted # decrypted read-only virtual directory
+LOCALDATA=/tmp/toBeRestoredEncrypted # local copy of encrypted remote backup
+REMOTEDIR=/drives/HDD1/backups/night-rsync # dir in the remote server
+ENCBACKUP=$SERVER:$REMOTEDIR  # encrypted source directory
+
+#===============================================================
+# Set a trap for CTRL+C to properly exit
+#===============================================================
+
+trap "echo CTRL+C Pressed!; read -p 'Press Enter to exit...'; exit 1;" SIGINT SIGTERM
+
+#===============================================================
+# Initial checks
+#===============================================================
+
+# rsync must be installed
+if [ -z "$(which rsync)" ]; then
+    echo "Error: rsync is not installed"
+    read -p "Press Enter to exit..."
+    exit 1
+fi
+
+# gocryptfs must be installed
+if [ -z "$(which gocryptfs)" ]; then
+    echo "Error: gocryptfs is not installed"
+    read -p "Press Enter to exit..."
+    exit 1
+fi
+
+#===============================================================
+# rsync virtual directory and mount it
+#===============================================================
+
+mkdir -p $DECVIRDIR
+mkdir -p $LOCALDATA
+
+if find "$DECVIRDIR" -mindepth 1 -maxdepth 1 | read; then
+   echo "The decrypted virtual directory $DECVIRDIR must be empty!"
+   echo "You can umount it with:"
+   echo "fusermount -u $DECVIRDIR"
+fi
+
+while [ "true" ]
+do
+
+    # rsync remote encrypted copy of data to local copy:
+    if rsync --bwlimit=$BWLIMIT -P -a -z --delete $ENCBACKUP/ $LOCALDATA; then
+        echo "rsync succeeded -> a full copy of $ENCBACKUP encrypted data is ready in $LOCALDATA"
+        break
+    else
+        if ! $LOOP; then
+            echo "rsync failed"
+            read -p "Press Enter to exit..."
+            exit 1
+        fi
+    fi
+
+    if ! $LOOP; then
+        break
+    fi
+
+done
+
+if ! test -f $LOCALDATA/gocryptfs.conf; then
+    echo "The encrypted local directory $LOCALDATA cannot decrypted because gocryptfs.conf is missing!"
+    exit 1;
+fi
+
+# mount read-only decrypted virtual copy of encrypted data:
+if gocryptfs -ro $LOCALDATA $DECVIRDIR; then
+    echo "gocryptfs succeeded -> the encrypted dir $LOCALDATA is virtually decrypted in $DECVIRDIR"
+    echo "You can now rsync the virtual dir $DECVIRDIR in a safe place"
+    echo "When you done, remember to umount the virtual dir with:"
+    echo "fusermount -u $DECVIRDIR"
+else
+    echo "gocryptfs failed"
+    read -p "Press Enter to exit..."
+    exit 1
+fi
+
+read -p "Press Enter to exit..."
+exit 0

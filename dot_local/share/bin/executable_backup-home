@@ -1,0 +1,106 @@
+!/bin/bash
+
+#===============================================================
+# Constants
+#===============================================================
+
+LOOP=true # rsync loop, helpful with not stable internet connections, it can be true or false
+SERVER=pallaxis@192.168.68.56 # replace x.x.x.x with the remote server's IP or host name
+BWLIMIT=0 # maximum transfer rate (kbytes/s), 0 means no limit
+
+echo "rsync --bwlimit setted to $BWLIMIT kbytes/s (0 means no limit)"
+
+ENCVIRDIR=/tmp/toBeCopied # encrypted virtual read-only directory
+LOCALDATA="/home/pallaxis/" # local data to be backed up
+REMOTEDIR=/drives/HDD1/backups/night-rsync # dir in the remote server
+ENCBACKUP=$SERVER:$REMOTEDIR  # rsync destination dir
+
+#===============================================================
+# Set a trap for CTRL+C to properly exit
+#===============================================================
+
+trap "fusermount -u $ENCVIRDIR; rm -fR $ENCVIRDIR; echo CTRL+C Pressed!; read -p 'Press Enter to exit...'; exit 1;" SIGINT SIGTERM
+
+#===============================================================
+# Initial checks
+#===============================================================
+
+# rsync must be installed
+if [ -z "$(which rsync)" ]; then
+    echo "Error: rsync is not installed"
+    read -p "Press Enter to exit..."
+    exit 1
+fi
+
+# gocryptfs must be installed
+if [ -z "$(which gocryptfs)" ]; then
+    echo "Error: gocryptfs is not installed"
+    read -p "Press Enter to exit..."
+    exit 1
+fi
+
+#===============================================================
+# Mount and rsync virtual encrypted directory
+#===============================================================
+
+mkdir -p $ENCVIRDIR
+
+if find "$ENCVIRDIR" -mindepth 1 -maxdepth 1 | read; then
+    echo "The encrypted virtual directory $ENCVIRDIR must be empty!"
+    exit 1
+fi
+
+if find "$LOCALDATA" -mindepth 1 -maxdepth 1 | read; then
+    echo "The unencrypted directory $LOCALDATA contains local data to be backed up..."
+else
+    echo "The unencrypted directory $LOCALDATA cannot be empty, it must contain local data to be backed up..."
+    exit 1
+fi
+
+if test -f "$LOCALDATA/.gocryptfs.reverse.conf"; then
+    echo "The unencrypted directory $LOCALDATA is already initialized for gocryptfs usage."
+else
+    echo "Initializing read-only encrypted view of the unencrypted directory $LOCALDATA,"
+    echo "without encrypting file names and symlink (to allow the recovery of individual files)."
+    gocryptfs -reverse -init -plaintextnames $LOCALDATA
+fi
+
+# mount read-only encrypted virtual copy of unencrypted local data:
+if gocryptfs -ro -one-file-system -reverse -exclude-from /home/pallaxis/.bin/backup-exclude-from $LOCALDATA $ENCVIRDIR; then
+    echo "gocryptfs succeeded -> the decrypted dir $LOCALDATA is virtually encrypted in $ENCVIRDIR"
+else
+    echo "gocryptfs failed"
+    read -p "Press Enter to exit..."
+    exit 1
+fi
+
+while [ "true" ]
+do
+
+    # rsync local encrypted virtual copy of data to destination dir:
+    if rsync --bwlimit=$BWLIMIT -P -a -z --delete $ENCVIRDIR/ $ENCBACKUP; then
+        echo "rsync succeeded -> a full encrypted copy of $LOCALDATA is ready in $ENCBACKUP"
+        break
+    else
+        if ! $LOOP; then
+            echo "rsync failed"
+            fusermount -u $ENCVIRDIR
+            read -p "Press Enter to exit..."
+            exit 1
+        fi
+    fi
+
+    if ! $LOOP; then
+        break
+    fi
+
+done
+
+# unmount encrypted virtual copy of local data :
+fusermount -u $ENCVIRDIR
+
+# remove encrypted virtual directory
+rm -fR $ENCVIRDIR
+
+read -p "Press Enter to exit..."
+exit 0
