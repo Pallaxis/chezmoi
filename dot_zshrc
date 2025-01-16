@@ -64,10 +64,10 @@ prompt pure
 # Keybindings
 WORDCHARS=${WORDCHARS/\/}														# Allows deleting up to / as a word
 bindkey -v
-bindkey '^K' history-search-backward
+bindkey '^H'  beginning-of-line
 bindkey '^J' history-search-forward
-bindkey '^[[H'  beginning-of-line
-bindkey '^[[F'  end-of-line
+bindkey '^K' history-search-backward
+bindkey '^L'  end-of-line
 bindkey '\e[3~' delete-char														# Del key to delete under cursor
 bindkey '^U' kill-whole-line
 bindkey '^[^?' backward-kill-word
