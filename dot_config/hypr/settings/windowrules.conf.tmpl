@@ -104,8 +104,7 @@ workspace = 7, monitor:HDMI-A-2
 workspace = 8, monitor:HDMI-A-2
 workspace = 9, monitor:HDMI-A-2
 workspace = 0, monitor:HDMI-A-2
-{{- end }}
-{{- if eq .chezmoi.hostname "night" }}
+{{- else if eq .chezmoi.hostname "night" }}
 
 workspace = 1, monitor:DP-1
 workspace = 2, monitor:DP-1

@@ -63,7 +63,7 @@ prompt pure
 
 # Keybindings
 WORDCHARS=${WORDCHARS/\/}														# Allows deleting up to / as a word
-bindkey -v
+bindkey -e
 bindkey '^H'  beginning-of-line
 bindkey '^J' history-search-forward
 bindkey '^K' history-search-backward
