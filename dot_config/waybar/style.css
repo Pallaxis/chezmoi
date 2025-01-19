@@ -67,7 +67,7 @@ window#waybar.empty {
 	opacity: 1.0;
 }
 
-#workspaces button.active {
+#workspaces button.active, #workspaces button.visible {
 	color: @base;
 	background: @blue;
 	border-radius: 15px;
