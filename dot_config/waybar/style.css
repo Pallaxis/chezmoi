@@ -55,7 +55,7 @@ tooltip label {
   text-shadow: none;
   box-shadow: none;
 }
-#workspaces button.active {
+#workspaces button.active, #workspaces button.visible{
   color: @active-fg;
   background: @active-bg;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
