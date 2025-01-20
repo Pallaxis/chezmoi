@@ -96,7 +96,8 @@ else
   active_device=$(nmcli -t -f DEVICE,STATE device status |
     grep -w "connected" |
     grep -v -E "^(dummy|lo:)" |
-    awk -F: '{print $1}')
+    awk -F: '{print $1}' |
+	awk 'NR==1')
 
   if [ -n "$active_device" ]; then
     output=$(nmcli -e no -g ip4.address,ip4.gateway,general.hwaddr device show "$active_device")
