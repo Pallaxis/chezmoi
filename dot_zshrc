@@ -9,7 +9,7 @@ stty -ixon																		# Disables XON/XOFF flow control
 stty -ixoff																		# Disables sending of start/stop characters
 
 # There's probably a better way to do this
-export XDG_CACHE_HOME=$HOME/.cache/
+#export XDG_CACHE_HOME=$HOME/.cache/
 
 export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
 
@@ -21,6 +21,8 @@ if [ ! -d "$ZINIT_HOME" ]; then													# Download Zinit, if it's not there 
 fi
 source "${ZINIT_HOME}/zinit.zsh"												# Source/Load zinit
 
+# Path
+path=("$HOME/.local/share/bin" $path)
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -64,6 +66,8 @@ prompt pure
 # Keybindings
 WORDCHARS=${WORDCHARS/\/}														# Allows deleting up to / as a word
 bindkey -e
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
 bindkey '^H'  beginning-of-line
 bindkey '^J' history-search-forward
 bindkey '^K' history-search-backward
