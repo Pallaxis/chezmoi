@@ -50,6 +50,8 @@
   ],
 
   "modules-right": [
+    "tray",			        // tray
+
     "custom/media",         // media info
 
     "custom/left6",
