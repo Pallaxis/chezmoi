@@ -83,15 +83,14 @@ HISTSIZE=5000
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
+setopt append_history
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-setopt extended_glob null_glob
+setopt extended_glob 
 
 # Helpful aliases
 alias c='clear'																	# Clear terminal
