@@ -77,6 +77,8 @@ bindkey '^L'  end-of-line
 bindkey '\e[3~' delete-char														# Del key to delete under cursor
 bindkey '^U' kill-whole-line
 bindkey '^[^?' backward-kill-word
+bindkey '^[h' emacs-backward-word
+bindkey '^[l' forward-word
 
 # History
 HISTSIZE=5000
