@@ -1,3 +1,8 @@
+chez_edit_apply() {
+  chezmoi edit "$1" && chezmoi apply
+}
+
+
 # Autostarting stuff
 if uwsm check may-start; then
     exec uwsm start -S hyprland.desktop
@@ -107,6 +112,7 @@ alias pa='yay -Ss'																# List availabe package
 alias pc='yay -Sc'																# Remove unused cache
 alias po='yay -Qtdq | $aurhelper -Rns -'										# Remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
 alias cat='bat'																	# Cat but with colors
+alias ce='chez_edit_apply'
 
 # Handy change dir shortcuts
 alias -- -='cd -'

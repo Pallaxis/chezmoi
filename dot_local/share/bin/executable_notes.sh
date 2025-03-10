@@ -10,7 +10,7 @@ newnote () { \
 }
 
 selected () { \
-    choice=$(echo -e "New\n$(ls -t1 $notesfolder)" | rofi -dmenu -p "Choose note or create new: ")
+    choice=$(echo -e "New\n$(ls -t1 $notesfolder | grep '.txt')" | rofi -dmenu -p "Choose note or create new: ")
     case $choice in
         New) newnote;;
         *txt) setsid -f "$TERMINAL" -e nvim "$notesfolder$choice" &> /dev/null;;
