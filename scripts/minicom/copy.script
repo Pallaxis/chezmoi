@@ -1,0 +1,13 @@
+#unfinished
+start:
+send 
+expect {
+	"login:"
+}
+send root
+
+expect {
+	"]#"
+}
+send x temp show 0
+goto start

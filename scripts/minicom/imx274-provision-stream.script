@@ -1,0 +1,33 @@
+timeout 9999
+start:
+
+send ""
+
+expect {
+    "Oclea login:"
+}
+send root
+sleep 3
+send clear
+send ""
+
+expect {
+	"[root@Oclea ~]#"
+}
+send ""
+send hydra_provision -i 0 -s 0x0101 0x0101 -s 0x0401 0x0f00 -s 0x0402 0x0870 -s 0x0403 0x001e -s 0x0103 0x0101
+expect {
+	"[root@Oclea ~]#"
+}
+send ""
+send hydra
+expect {
+	"[root@Oclea ~]#"
+}
+send oclea_gstreamer_interactive_example -r
+
+expect {
+	">>>"
+}
+
+goto start

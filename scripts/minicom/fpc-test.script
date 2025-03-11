@@ -1,0 +1,22 @@
+timeout 9999
+start:
+
+send ""
+
+expect {
+    "Oclea login:"
+}
+send root
+expect {
+	"[root@Oclea ~]#"
+}
+send clear
+send ""
+
+send oclea_gstreamer_interactive_example -r
+
+expect {
+	">>>"
+}
+
+goto start

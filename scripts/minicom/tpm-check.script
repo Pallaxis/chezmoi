@@ -1,0 +1,33 @@
+#unfinished
+start:
+send 
+expect {
+	"login:"
+}
+sleep 1
+send root
+
+expect {
+	"]#"
+}
+send oclea_info
+
+expect {
+	"]#"
+}
+send x cert probe
+
+expect {
+	"]#"
+}
+send x cert verify
+
+expect {
+	"]#"
+}
+send x manifest
+
+expect {
+	"]#"
+}
+goto start
