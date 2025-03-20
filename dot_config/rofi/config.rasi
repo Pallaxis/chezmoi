@@ -1,4 +1,4 @@
-/*configuration {
+configuration {
 	location: 0;
 	show-icons: true;
 	terminal: "kitty";
@@ -28,32 +28,6 @@
 		directories-first: true;
 		sorting-method:    "name";
 	}
-}*/
-
-configuration{
-	modi: "run,drun,window";
-	icon-theme: "Oranchelo";
-	show-icons: true;
-	terminal: "kitty";
-	drun-display-format: "{icon} {name}";
-	location: 0;
-	disable-history: false;
-	hide-scrollbar: true;
-	display-drun: "   Apps ";
-	display-run: "   Run ";
-	display-window: " 󰕰  Window";
-	display-Network: " 󰤨  Network";
-	sidebar-mode: true;
-	kb-remove-char-back: "BackSpace,Shift+BackSpace"; /* these four binds unbind the ctrl hjkl variants */
-	kb-remove-to-eol: "";
-	kb-accept-entry: "Control+m,Return,KP_Enter";
-	kb-mode-complete: "";
-	kb-row-left: "Control+h";
-	kb-row-right: "Control+l";
-	kb-element-next: "Control+j";
-	kb-element-prev: "Control+k";
-	me-select-entry: "MouseSecondary";
-	me-accept-entry: "MousePrimary";
 }
 
 @theme "catppuccin-mocha"
