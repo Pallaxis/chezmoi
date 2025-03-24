@@ -1,11 +1,14 @@
+# Functions
 chez_edit_apply() {
   chezmoi edit "$1" && chezmoi apply
 }
 
 
 # Autostarting stuff
-if uwsm check may-start; then
-    exec uwsm start -S hyprland.desktop
+if [[ -z $TMUX ]]; then
+    if uwsm check may-start; then
+	exec uwsm start -S hyprland.desktop
+    fi
 fi
 
 # Sending commands on terminal launch
