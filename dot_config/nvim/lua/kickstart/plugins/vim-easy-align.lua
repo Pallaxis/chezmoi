@@ -1,0 +1,19 @@
+-- Highlight todo, notes, etc in comments
+return {
+	{
+		"junegunn/vim-easy-align",
+		keys = {
+			{ "ga", mode = { "n", "x", "o" }, "<cmd>EasyAlign<cr>", desc = "Easy align text" },
+		},
+	},
+}
+-- vim: ts=2 sts=2 sw=2 et
+---return {
+---	{
+---		"folke/todo-comments.nvim",
+---		event = "VimEnter",
+---		dependencies = { "nvim-lua/plenary.nvim" },
+---		opts = { signs = false },
+---	},
+---}
+-- vim: ts=2 sts=2 sw=2 et
