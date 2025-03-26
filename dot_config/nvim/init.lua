@@ -134,6 +134,13 @@ end, NS)
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- TODO: Not working, afaik it's supposed to remove the inline nags from linters and let you hover instead
+vim.diagnostic.config {
+  virtual_text = false,
+  signs = true,
+  float = { border = 'single' },
+}
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
