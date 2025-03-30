@@ -4,9 +4,6 @@ return {
     branch = 'v2',
     lazy = true,
     init = function()
-      -- Create your mappings here
-    end,
-    config = function()
       local NS = { noremap = true, silent = true }
 
       -- Aligns to 1 character
