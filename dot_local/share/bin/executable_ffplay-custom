@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+command() {
+    SDL_VIDEODRIVER=wayland ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1 rtsp://$1:8554/test
+}
+
+command $1
