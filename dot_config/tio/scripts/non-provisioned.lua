@@ -8,7 +8,7 @@ function ShellReady()
 end
 
 IP = "10.71.0.73"
-Command = string.format("alacritty -e ffplay rtsp://%s:8554/test", IP)
+Command = string.format("alacritty -e ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1 rtsp://%s:8554/test", IP)
 
 write("\n")
 
