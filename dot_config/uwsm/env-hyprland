@@ -1,0 +1,4 @@
+# Cursor settings, requires hyprcursor
+export HYPRCURSOR_THEME=Bibata-Modern-SVG
+export HYPRCURSOR_SIZE=24
+

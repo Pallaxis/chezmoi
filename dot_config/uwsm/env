@@ -1,0 +1,44 @@
+# █▀▀ █▄░█ █░█
+# ██▄ █░▀█ ▀▄▀
+
+# See https://wiki.hyprland.org/Configuring/Environment-variables/
+
+export XDG_CURRENT_DESKTOP=Hyprland
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export MOZ_ENABLE_WAYLAND=1
+export GDK_SCALE=1
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+
+
+# Sets default editor
+export EDITOR=nvim
+export VISUAL=nvim
+
+# Enables mangohud (Makes loads of applications unusable)
+#export MANGOHUD=1
+
+
+# █▄░█ █░█ █ █▀▄ █ ▄▀█
+# █░▀█ ▀▄▀ █ █▄▀ █ █▀█
+
+# See https://wiki.hyprland.org/Nvidia/
+
+#export LIBVA_DRIVER_NAME=nvidia
+#export __GLX_VENDOR_LIBRARY_NAME=nvidia
+#export __GL_VRR_ALLOWED=1
+#export WLR_NO_HARDWARE_CURSORS=1
+#export WLR_DRM_NO_ATOMIC=1
+
+export LIBVA_DRIVER_NAME=nvidia
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia # this might cause my discord streams to not work
+export WLR_NO_HARDWARE_CURSORS=1
+
+export ELECTRON_OZONE_PLATFORM_HINT=auto # tries to run electron apps in native wayland
+#export MANGOHUD_DLSYM=1 # not sure if this was meant to be commented
+
