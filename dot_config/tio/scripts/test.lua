@@ -1,20 +1,37 @@
-function Shell_Ready()
-	expect("~]# ")
+-- stupid copilot script that doesn't do what i want it to do even remotely
+local coroutine = coroutine
+
+function shell_ready()
+    expect("~]# ")
 end
 
---os.execute("ffplay 10.71.0.73")
-IP="10.71.0.73"
-write(os.execute(string.format("alacritty -e ffplay %s", IP)))
+local function automation()
+    write("\n")
 
---write("\n")
---
---if expect("~]# ", 100) == 0 then
---	write("\n")
---	expect("login: ")
---	write("root\n")
---	Shell_Ready()
---end
---write("clear\n")
---
---write("echo 'Probe status:'\n")
---write("x cert probe 2>&1 | awk '/status_text/ {print $2}'\n")
+    if expect("~]# ", 100) == 0 then
+        write("\n")
+        expect("login: ")
+        write("root\n")
+        shell_ready()
+    end
+
+    write("clear\n")
+
+    expect("rand")
+end
+
+-- Wrap the script in a coroutine
+local script = coroutine.create(automation)
+
+-- Periodically resume the coroutine
+while true do
+    local status, err = coroutine.resume(script)
+    if not status then
+        print("Error: " .. err)
+        break
+    end
+
+    -- Introduce a short delay or yield control to allow manual input
+    os.execute("sleep 0.1") -- Adjust this for your environment
+end
+

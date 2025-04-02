@@ -12,9 +12,9 @@ if [[ -z $TMUX ]]; then
 fi
 
 # Sending commands on terminal launch
-fastfetch																		# Shows a sick ass fetch
-stty -ixon																		# Disables XON/XOFF flow control
-stty -ixoff																		# Disables sending of start/stop characters
+fastfetch											# Shows a sick ass fetch
+stty -ixon											# Disables XON/XOFF flow control
+stty -ixoff											# Disables sending of start/stop characters
 
 # There's probably a better way to do this
 #export XDG_CACHE_HOME=$HOME/.cache/
@@ -23,11 +23,11 @@ export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
 
 # Zinit stuff
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"				# Set the directory we want to store zinit and plugins
-if [ ! -d "$ZINIT_HOME" ]; then													# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then									# Download Zinit, if it's not there yet
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
-source "${ZINIT_HOME}/zinit.zsh"												# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"								# Source/Load zinit
 
 # Path
 path=("$HOME/.local/share/bin" $path)
@@ -37,8 +37,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-#zinit ice depth=1
-#zinit light jeffreytse/zsh-vi-mode
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit light sindresorhus/pure
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -72,7 +72,7 @@ autoload -U promptinit; promptinit
 prompt pure
 
 # Keybindings
-WORDCHARS=${WORDCHARS/\/}														# Allows deleting up to / as a word
+WORDCHARS=${WORDCHARS/\/}							# Allows deleting up to / as a word
 bindkey -e
 bindkey '^H'  beginning-of-line
 bindkey '^[[H' beginning-of-line
@@ -82,7 +82,7 @@ bindkey '^H'  beginning-of-line
 bindkey '^J' history-search-forward
 bindkey '^K' history-search-backward
 bindkey '^L'  end-of-line
-bindkey '\e[3~' delete-char														# Del key to delete under cursor
+bindkey '\e[3~' delete-char							# Del key to delete under cursor
 bindkey '^U' kill-whole-line
 bindkey '^[^?' backward-kill-word
 bindkey '^[h' emacs-backward-word
@@ -103,20 +103,21 @@ setopt hist_find_no_dups
 setopt extended_glob 
 
 # Helpful aliases
-alias c='clear'																	# Clear terminal
-alias l='eza -lh  --icons=auto'													# Long list
-alias ls='eza -1   --icons=auto'												# Short list
-alias ll='eza -lhag --icons=auto --sort=name --group-directories-first'			# Long list all
-alias ld='eza -lhD --icons=auto'												# Long list dirs
-alias lm='eza --icons=auto -1 -rs modified' # sorts newest at the top
-alias lc='eza --icons=auto -1 -rs created' # sorts newest at the top
-alias un='yay -Rns'																# Uninstall package
-alias up='update.sh up'															# Update system/package/aur
-alias pl='yay -Qs'																# List installed package
-alias pa='yay -Ss'																# List availabe package
-alias pc='yay -Sc'																# Remove unused cache
-alias po='yay -Qtdq | $aurhelper -Rns -'										# Remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
-alias cat='bat --paging=never --style=plain'																	# Cat but with colors
+alias c='clear'									# Clear terminal
+alias l='eza -lh --icons=auto'							# Long list
+alias ls='eza -1 --icons=auto'							# Short list
+alias ll='eza -lhag --icons=auto --sort=name --group-directories-first'		# Long list all
+alias ld='eza -lhD --icons=auto'						# Long list dirs
+alias lm='eza --icons=auto --sort=created --reverse --long --created'		# Sorts most recently created at the top
+alias lc='eza --icons=auto --sort=modified --reverse --long --modified'		# Sorts most recently modified at the top
+alias tree='eza --tree'								# Same as tree but with colours
+alias un='yay -Rns'								# Uninstall package
+alias up='update.sh up'								# Update system/package/aur
+alias pl='yay -Qs'								# List installed package
+alias pa='yay -Ss'								# List availabe package
+alias pc='yay -Sc'								# Remove unused cache
+alias po='yay -Qtdq | $aurhelper -Rns -'					# Remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
+alias cat='bat --paging=never --style=plain'					# Cat but with colors
 alias ce='chez_edit_apply'
 
 # Handy change dir shortcuts
@@ -127,9 +128,9 @@ alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias ..5='cd ../../../../..'
 
-alias mkdir='mkdir -p'															# Always mkdir a path (this doesn't inhibit functionality to make a single dir)
-alias cp='cp -r'																# Same for cp
-[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"					# Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
+alias mkdir='mkdir -p'								# Always mkdir a path (this doesn't inhibit functionality to make a single dir)
+alias cp='cp -r'								# Same for cp
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"			# Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 
 # Custom aliases
 alias homeserver='~/.secrets/homeserver'
