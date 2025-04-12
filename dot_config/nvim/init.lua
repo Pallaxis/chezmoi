@@ -123,7 +123,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Imports all plugins inside of custom/plugins/
-  { import = "custom.plugins" },
+  { import = "plugins" },
   --
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
