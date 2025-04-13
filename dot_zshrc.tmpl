@@ -111,12 +111,6 @@ alias ld='eza -lhD --icons=auto'						# Long list dirs
 alias lm='eza --icons=auto --sort=created --reverse --long --created'		# Sorts most recently created at the top
 alias lc='eza --icons=auto --sort=modified --reverse --long --modified'		# Sorts most recently modified at the top
 alias tree='eza --tree --icons=auto'								# Same as tree but with colours
-alias un='yay -Rns'								# Uninstall package
-alias up='update.sh up'								# Update system/package/aur
-alias pl='yay -Qs'								# List installed package
-alias pa='yay -Ss'								# List availabe package
-alias pc='yay -Sc'								# Remove unused cache
-alias po='yay -Qtdq | $aurhelper -Rns -'					# Remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
 alias cat='bat --paging=never --style=plain'					# Cat but with colors
 alias ce='chez_edit_apply'
 
