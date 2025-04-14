@@ -5,7 +5,7 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        python = { 'pylint' },
+        --python = { 'pylint' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
