@@ -1,8 +1,18 @@
 # Functions
-chez_edit_apply() {
-  chezmoi edit "$1" && chezmoi apply
-}
+# Checks whether a file is managed by Chezmoi, editing accordingly
+function vi() {
+    if [ $# -eq 0 ]; then
+	nvim
+	return
+    fi
 
+    # Added "--hardlink=false" option to get neovim undo available.
+    if chezmoi verify "$1" > /dev/null 2>&1; then
+	chezmoi edit --watch --hardlink=false "$1"
+    else
+	nvim "$@"
+    fi
+}
 
 # Autostarting stuff
 if [[ -z $TMUX ]]; then
@@ -112,7 +122,6 @@ alias lm='eza --icons=auto --sort=created --reverse --long --created'		# Sorts m
 alias lc='eza --icons=auto --sort=modified --reverse --long --modified'		# Sorts most recently modified at the top
 alias tree='eza --tree --icons=auto'								# Same as tree but with colours
 alias cat='bat --paging=never --style=plain'					# Cat but with colors
-alias ce='chez_edit_apply'
 
 # Handy change dir shortcuts
 alias -- -='cd -'
@@ -130,9 +139,7 @@ alias cp='cp -r'								# Same for cp
 alias homeserver='~/.secrets/homeserver'
 alias oraclebox='~/.secrets/oraclebox'
 alias sudo='sudo '
-alias vi='nvim'
 alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1"
-
 
 # Shell integrations
 eval "$(batman --export-env)"
