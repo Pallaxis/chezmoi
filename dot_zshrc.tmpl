@@ -86,18 +86,9 @@ prompt pure
 # need to find way to set ctrl+p, ctrl+n for history, can't seem to bind it and ^P is ctrl shift p
 WORDCHARS=${WORDCHARS/\/}							# Allows deleting up to / as a word
 bindkey -e
-bindkey '^H'  beginning-of-line
-bindkey '^[[H' beginning-of-line
-bindkey '^L'  end-of-line
-bindkey '^[[F' end-of-line
-bindkey '^n' down-history
-bindkey '^p' up-history
-bindkey '^U' kill-whole-line
-bindkey '\e[3~' delete-char							# Del key to delete under cursor
-bindkey '^[^?' backward-kill-word
-bindkey '^[h' emacs-backward-word
-bindkey '^[p' backward-word
-bindkey '^[n' forward-word
+bindkey '^[[H' beginning-of-line						# Home
+bindkey '^[[F' end-of-line							# End
+bindkey '\e[3~' delete-char							# Del
 
 # History
 HISTSIZE=5000
