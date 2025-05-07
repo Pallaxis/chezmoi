@@ -24,8 +24,7 @@ $oclea_usb -V
 echo
 
 echo $oclea_erase
-if $oclea_erase; then
-    echo -e "${green}Erasing complete!${no_color}"
-    echo -e "${blue}Flashing with $(basename $firmware_path)${no_color}"
-    sleep 2 && $oclea_flash
-fi
+echo -e "${green}Erasing complete!${no_color}"
+echo -e "${blue}Flashing with $(basename $firmware_path)${no_color}"
+sleep 2 && $oclea_flash
+notify-send "Flashing Completed!"
