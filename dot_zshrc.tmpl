@@ -25,7 +25,7 @@ fi
 if [[ -z $(pidof tmux) ]]; then
     tmux new-session -s general
 elif [[ -z $(tmux list-clients) ]]; then
-    tmux a -t general
+    tmux new-session -A -s general
 fi
 # NOTE: For some reason this makes tmux-sessionizer fzf lose it's colours. Running fzf manually doensn't though
 
