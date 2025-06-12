@@ -25,5 +25,6 @@ if echo "$sessions" | grep -qx "$chosen"; then
     tmuxp load "$chosen" --yes > /dev/null 2>&1
 else
     # Create a new tmux session with that name
-    tmux new-session -A -s "$chosen"
+    tmux new-session -Ad -s "$chosen"
+    tmux switch-client -t "$chosen"
 fi
