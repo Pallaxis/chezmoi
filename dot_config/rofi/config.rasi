@@ -1,4 +1,5 @@
 configuration {
+	modes: "window,run,drun";
 	location: 0;
 	show-icons: true;
 	terminal: "kitty";
