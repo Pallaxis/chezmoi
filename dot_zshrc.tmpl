@@ -93,7 +93,6 @@ autoload -U promptinit; promptinit
 prompt pure
 
 # Keybindings
-# need to find way to set ctrl+p, ctrl+n for history, can't seem to bind it and ^P is ctrl shift p
 WORDCHARS=${WORDCHARS/\/}							# Allows deleting up to / as a word
 bindkey -e
 bindkey -r "^S"									# Unbind incremental search forward (unneeded)
@@ -104,15 +103,14 @@ bindkey '^[[4~' end-of-line							# End tmux
 bindkey '\e[3~' delete-char							# Del
 
 # History
-HISTSIZE=5000
+HISTSIZE=10000
 HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
-setopt append_history
+setopt inc_append_history
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
 setopt hist_save_no_dups
-setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 setopt extended_glob 
