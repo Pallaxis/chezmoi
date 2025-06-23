@@ -9,3 +9,7 @@ pacman -Fl # lists files owned by package
 pacman -F {query here} # searches all packages for files, useful for finding package that provides command
 pacman -Qo # shows what package provides this command
 pacman -Qet # packages explicitly installed and not required as deps
+
+vi sort and replace:
+Sort the file using :sort
+Execute command :g/^\(.*\)$\n\1$/p
