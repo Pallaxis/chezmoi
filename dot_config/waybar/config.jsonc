@@ -225,8 +225,8 @@
   "idle_inhibitor": {
     "format": " ",
     "tooltip": true,
-    "tooltip-format-activated": "Presentation Mode",
-    "tooltip-format-deactivated": "Idle Mode",
+    "tooltip-format-activated": "Idle Inhibited",
+    "tooltip-format-deactivated": "Able to idle",
     "start-activated": false
   },
 

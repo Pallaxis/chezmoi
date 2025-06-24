@@ -203,6 +203,9 @@ tooltip label {
   padding-left: 3px;
   text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
 }
+#idle_inhibitor.activated {
+  color: red;
+}
 #custom-right2 {
   color: @distro-bg;
   background: @main-bg;

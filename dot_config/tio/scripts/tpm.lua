@@ -25,6 +25,7 @@ while true do
 	--write([[echo -e "\e[33mManifest status: ${MANIFEST}\e[0m"]])
 	--write("\n")
 
+	write("tek_ota --bootloader-version\n")
 	write("oclea_info\n")
 
 	expect("login: ")
