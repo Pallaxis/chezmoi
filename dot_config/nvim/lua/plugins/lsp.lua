@@ -272,7 +272,8 @@ return {
         "pylint", -- Python linter
         "markdownlint", -- Markdown linter
         "pyright", -- Python static type checker
-        "yaml-language-server",
+        "yaml-language-server", -- yaml
+        "hyprls", -- Hyprlang
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
